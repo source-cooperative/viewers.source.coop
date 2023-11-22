@@ -1,10 +1,9 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { Form, Layout, FieldState, FieldType, FormResult, CodeBlock, Logo } from "@source-cooperative/components";
-import { Box, Paragraph, Text, Flex } from "theme-ui";
-import Link from "next/link";
+import { Form, FieldState, FieldType, FormResult, Logo, Footer } from "@source-cooperative/components";
+import { Box, Text, Flex, Heading, Link } from "theme-ui";
 import { ViewerLoader } from "../components/viewers/viewer";
-import { set } from "ol/transform";
+import Layout from "../components/Layout";
 
 export default function Home() {
   const router = useRouter();
@@ -82,10 +81,10 @@ export default function Home() {
     </Flex>
   </Link>;
   
-  return <Layout logo={logo}>
+  return <Layout>
     
     {
-      url ? <ViewerLoader url={url} viewerId={selectedViewer} /> : <Box sx={{maxWidth: "800em"}}>
+      url ? <ViewerLoader url={url} viewerId={selectedViewer} /> : <Box sx={{maxWidth: "800em"}}><Heading as="h2">Enter a URL</Heading>
         <Form onSubmit={onSubmit} gridColumns={["auto", "auto", "1fr 1fr", "1fr 1fr"]} fields={fields} />
       </Box>
     }  
