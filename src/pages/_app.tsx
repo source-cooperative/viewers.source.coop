@@ -1,3 +1,6 @@
+import { SourceProvider, SourceComponents } from "@source-cooperative/components";
+import theme from '@source-cooperative/theme'
+import { SkeletonTheme } from "react-loading-skeleton";
 
 const fetcher = async opts => {
   const { path, args, exclude_credentials, external, raw, markdown } = opts;
@@ -44,7 +47,11 @@ import type { AppProps } from "next/app";
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <main>
-        <Component {...pageProps} />
+      <SourceProvider theme={theme} components={SourceComponents}>
+        <SkeletonTheme baseColor="var(--theme-ui-colors-muted)" highlightColor="var(--theme-ui-colors-highlight)" borderRadius={0}>
+          <Component {...pageProps} />
+        </SkeletonTheme>
+      </SourceProvider>
     </main>
   );
 }
