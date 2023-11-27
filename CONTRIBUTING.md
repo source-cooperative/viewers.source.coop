@@ -41,3 +41,9 @@ You can run the demo site of the viewers locally by first installing the depende
 
 The final step to getting your viewer included is to create a PR on this repository.
 Within the PR include a description of what types of files your viewer is compatible with and if possible some links to files which the viewer can be tested with.
+
+## Tips
+
+- Our frontend uses the [theme-ui](https://theme-ui.com/) framework. Make use of these components as much as you can!
+- We've developed some [extra components](https://github.com/source-cooperative/components) for Source Cooperative which are included in this project.
+- Make use of HTTP range requests when possile to ensure that you are loading the minimum required data to ensure good performance.
