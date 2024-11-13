@@ -2,16 +2,25 @@
 
 import { FileProps, ViewerMetadata } from "../interfaces";
 import { useEffect, useState } from "react";
-import { AspectRatio, Box, Heading, Text } from "theme-ui";
+import { AspectRatio, Box, Text } from "theme-ui";
 import Skeleton from "react-loading-skeleton";
-import { csv } from "d3-fetch";
+import { csv, tsv } from "d3-fetch";
 import type { DSVRowArray } from "d3-dsv";
+
+const extensionToFunction = {
+  ".csv": csv,
+  ".tsv": tsv,
+} as const;
 
 export const viewerMetadata: ViewerMetadata = {
   title: "Table Viewer",
   description: "A table viewer.",
   compatibilityCheck: (props: FileProps) => {
-    if (props.filename.toLowerCase().endsWith(".csv")) {
+    if (
+      Object.keys(extensionToFunction).some((key) =>
+        props.filename.toLowerCase().endsWith(key)
+      )
+    ) {
       return true;
     }
     return false;
@@ -29,16 +38,19 @@ export function TableViewer(props: FileProps) {
   const [error, setError] = useState<string>(null);
   const [data, setData] = useState<RowArray>(null);
 
-  async function fetchData(url: string) {
+  async function fetchData(url: string, filename: string) {
     try {
-      const response = await fetch(url);
-      if (!response.ok) {
-        setError(`Error: ${response.status} ${response.statusText}`);
+      const extensionKey = Object.keys(extensionToFunction).find((key) =>
+        props.filename.toLowerCase().endsWith(key)
+      );
+      if (!extensionKey) {
+        setError("Unsupported file format.");
         return;
       }
+      const fetchFunction = extensionToFunction[extensionKey];
+
       // TODO(SL): stream the first rows instead of downloading the whole CSV (https://observablehq.com/@mbostock/streaming-csv)
-      // TODO(SL): support TSV and other DSV?
-      const data: RowArray = await csv(url);
+      const data: RowArray = await fetchFunction(url);
       data.numRows = data.length;
       data.splice(MAX_NUM_ROWS);
       for (const row of data) {
@@ -63,8 +75,8 @@ export function TableViewer(props: FileProps) {
   }, [error]);
 
   useEffect(() => {
-    fetchData(url);
-  }, [url]);
+    fetchData(url, filename);
+  }, [url, filename]);
 
   if (!data) {
     return (
