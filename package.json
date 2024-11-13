@@ -21,6 +21,7 @@
 		"@mdx-js/react": "^3.0.0",
 		"@theme-ui/color": "0.16.1",
 		"@theme-ui/prism": "0.16.1",
+		"d3-fetch": "^3.0.1",
 		"monorepo": "github:mdx-js/mdx",
 		"next-mdx-remote": "^4.4.1",
 		"react-hot-toast": "^2.4.1",
@@ -35,6 +36,7 @@
 	"devDependencies": {
 		"@source-cooperative/theme": "1.0.11",
 		"@source-cooperative/components": "1.0.15",
+		"@types/d3-fetch": "^3.0.7",
 		"@types/node": "20.9.4",
 		"@types/react": "18.2.38",
 		"prettier": "2.3.0",

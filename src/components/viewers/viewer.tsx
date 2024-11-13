@@ -3,11 +3,13 @@
 import { viewerMetadata as markdown } from "./markdown";
 import { viewerMetadata as text } from "./text";
 import { viewerMetadata as map } from "./map";
+import { viewerMetadata as table } from "./table";
 
 export const viewers = {
 	markdown: markdown,
 	text: text,
 	map: map,
+	table: table,
 };
 
 import { useState, useEffect } from "react";
