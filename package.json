@@ -1,6 +1,7 @@
 {
   "name": "@source-cooperative/viewers",
-  "version": "1.0.2",
+  "version": "0.0.0",
+  "private": true,
   "description": "Source Cooperative Data Viewers",
   "main": "index.js",
   "repository": {
