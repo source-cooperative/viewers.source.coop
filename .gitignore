@@ -222,3 +222,5 @@ Temporary Items
 .ionide
 
 # End of https://www.toptal.com/developers/gitignore/api/osx,visualstudiocode,nextjs,node
+
+package-lock.json
