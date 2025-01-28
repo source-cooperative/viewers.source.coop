@@ -16,6 +16,7 @@ const nextConfig = {
 	publicRuntimeConfig: {
 		version,
 	},
+	transpilePackages: ["@source-cooperative/components"],
 };
 
 module.exports = nextConfig;
